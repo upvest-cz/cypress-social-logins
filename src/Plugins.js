@@ -54,6 +54,8 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
   await typeUsername({page, options})
   await typePassword({page, options})
 
+  await checkUserConsentIfNeeded({page, options})
+
   // Switch back to Original Window
   if (options.isPopup) {
     if (options.popupDelay) {
@@ -122,6 +124,17 @@ async function typePassword({page, options} = {}) {
 
   const buttonSelector = await waitForMultipleSelectors(buttonSelectors, {visible: true}, page)
   await page.click(buttonSelector)
+}
+
+async function checkUserConsentIfNeeded({page, options}) {
+  // don't throw if element not found - it's an OK state
+  // if the user already has an account or the apps does not run
+  // on localhost
+  try {
+    await page.waitForSelector(options.userConsentSelector)
+
+    await page.click(options.userConsentSelector)
+  } catch (err) {}
 }
 
 async function getCookies({page, options} = {}) {
