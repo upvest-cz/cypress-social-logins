@@ -56,9 +56,13 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
   await typeUsername({page, options})
   console.log('after typeUsername')
 
+  console.log('before typePassword')
   await typePassword({page, options})
+  console.log('after typePassword')
 
+  console.log('before checkUserConsentIfNeeded')
   await checkUserConsentIfNeeded({page, options})
+  console.log('after checkUserConsentIfNeeded')
 
   // Switch back to Original Window
   if (options.isPopup) {
@@ -73,7 +77,10 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
     await delay(options.cookieDelay)
   }
 
+  console.log('before getCookies')
   const cookies = await getCookies({page, options})
+  console.log('after getCookies')
+
   const lsd = await getLocalStorageData({page, options})
   const ssd = await getSessionStorageData({page, options})
   await finalizeSession({page, browser, options})
