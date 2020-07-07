@@ -51,6 +51,7 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
     page = pages[pages.length - 1]
   }
 
+  await page.screenshot({path: 'screenshot.png'})
   console.log('before typeUsername')
   await typeUsername({page, options})
   console.log('after typeUsername')
