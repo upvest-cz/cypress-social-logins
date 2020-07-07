@@ -51,7 +51,10 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
     page = pages[pages.length - 1]
   }
 
+  console.log('before typeUsername')
   await typeUsername({page, options})
+  console.log('after typeUsername')
+
   await typePassword({page, options})
 
   await checkUserConsentIfNeeded({page, options})
