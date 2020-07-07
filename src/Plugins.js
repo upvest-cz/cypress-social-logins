@@ -51,12 +51,17 @@ module.exports.GoogleSocialLogin = async function GoogleSocialLogin(options = {}
     page = pages[pages.length - 1]
   }
 
-  await page.screenshot({path: 'screenshot.png'})
+  await page.screenshot({path: 'screenshots/screenshot1.png'})
   console.log('before typeUsername')
   await typeUsername({page, options})
   console.log('after typeUsername')
 
   console.log('before typePassword')
+  await page.screenshot({path: 'screenshots/screenshot2.png'})
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  await page.screenshot({path: 'screenshots/screenshot3.png'})
+  await new Promise(resolve => setTimeout(resolve, 1000))
+  await page.screenshot({path: 'screenshots/screenshot4.png'})
   await typePassword({page, options})
   console.log('after typePassword')
 
